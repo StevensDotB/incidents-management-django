@@ -73,10 +73,15 @@ WSGI_APPLICATION = 'incidencesmanagement.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+
+# Sample configuration which uses a MySQL option file:
+# https://docs.djangoproject.com/en/2.1/ref/databases/#connecting-to-the-database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'incidences-management.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': os.path.join(BASE_DIR, 'my.cnf')
+        }
     }
 }
 
