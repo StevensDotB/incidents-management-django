@@ -9,6 +9,9 @@ class Department(models.Model):
 
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
 
 class UserEmployee(models.Model):
     """User employee"""
