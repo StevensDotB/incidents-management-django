@@ -36,3 +36,13 @@ class Incidence(models.Model):
 
     def __str__(self):
         return self.subject
+
+
+class IncidenceStatusLog(models.Model):
+    class Meta:
+        db_table = "incidences_status_log"
+
+    user = models.ForeignKey(User, on_delete=False)
+    incidence = models.ForeignKey(Incidence, on_delete=False, null=True)
+    status = models.ForeignKey(IncidenceStatus, on_delete=False, null=True)
+    update = models.DateTimeField(auto_now=True, verbose_name="Update Date")
