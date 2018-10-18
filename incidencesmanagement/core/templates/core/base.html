@@ -6,13 +6,14 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Incidences Management Help Desk">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <title>Help Desk Incidences {% block title %}{% endblock %}</title>
+    <title>Support Help Desk{% block title %}{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'core/vendor/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'core/vendor/font-awesome/css/all.min.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto+Condensed" rel="stylesheet">
 </head>
 <body>
+<!-- Begin:Main Nav bar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">Support Help Desk</a>
@@ -20,7 +21,6 @@
                 aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="navbar-collapse collapse" id="navbarColor01" style="">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -35,6 +35,31 @@
         </div>
     </div>
 </nav>
+<!-- End:Main Nav bar -->
+<!-- Begin:Nav bar Manager -->
+<nav id="nav-bar-manager" class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <h5 class="navbar-brand" href="{% url 'home' %}">Manage</h5>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-manage"
+                aria-controls="navbar-manage" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbar-manage" style="">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Users<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Departments<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Incidences<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End:Nav bar manager -->
 {% block content %}
 {% endblock content %}
 
