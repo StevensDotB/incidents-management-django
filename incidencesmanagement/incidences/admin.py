@@ -3,7 +3,12 @@ from .models import Incidence, IncidenceLevel, IncidenceStatus, IncidenceStatusL
 
 
 class IncidenceAdmin(admin.ModelAdmin):
-    readonly_fields = ('create', 'update',)
+    readonly_fields = ('user',
+                       'subject',
+                       'message',
+                       'level',
+                       'create',
+                       'update',)
     list_display = ('get_username',
                     'get_department',
                     'subject',
@@ -33,7 +38,11 @@ class IncidenceAdmin(admin.ModelAdmin):
 
 class IncidenceStatusLogAdmin(admin.ModelAdmin):
 
-    readonly_fields = ('update',)
+    readonly_fields = ('user',
+                       'incidence',
+                       'help_desk_comment',
+                       'status',
+                       'update',)
     list_display = ('incidence',
                     'get_username',
                     'get_status',
