@@ -26,9 +26,10 @@ class Incidence(models.Model):
     class Meta:
         db_table = "incidences"
 
-    subject = models.CharField(max_length=120)
-    message = models.TextField(max_length=350)
     user = models.ForeignKey(User, on_delete=False)
+    subject = models.CharField(max_length=120,  null=True)
+    message = models.TextField(max_length=350,  null=True)
+    help_desk_comment = models.TextField(max_length=120,  null=True)
     status = models.ForeignKey(IncidenceStatus, on_delete=models.CASCADE, null=True)
     level = models.ForeignKey(IncidenceLevel, on_delete=models.CASCADE, null=True)
     create = models.DateTimeField(auto_now_add=True, verbose_name="Creation Date")
@@ -44,5 +45,6 @@ class IncidenceStatusLog(models.Model):
 
     user = models.ForeignKey(User, on_delete=False)
     incidence = models.ForeignKey(Incidence, on_delete=False, null=True)
+    help_desk_comment = models.TextField(max_length=120, null=True)
     status = models.ForeignKey(IncidenceStatus, on_delete=False, null=True)
     update = models.DateTimeField(auto_now=True, verbose_name="Update Date")
