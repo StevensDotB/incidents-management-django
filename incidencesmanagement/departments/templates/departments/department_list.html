@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark text-center">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for department in object_list %}
+                        <tr>
+                            <th scope="row" class="text-center">{{ department.id }}</th>
+                            <td>{{ department.name }}</td>
+                            <td>
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-info btn-sm">Edit</button>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-lg-2 col-sm-12 my-1">
+                <a href="{% url 'departments:create' %}" class="btn btn-info btn-md btn-block">New Department</a>
+            </div>
+
+        </div>
+    </div>
+{% endblock content %}
