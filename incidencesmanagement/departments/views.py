@@ -14,7 +14,9 @@ class DepartmentListView(ListView):
 class DepartmentCreate(CreateView):
     model = Department
     form_class = DepartmentForm
-    success_url = reverse_lazy('departments:departments')
+
+    def get_success_url(self, *args):
+        return reverse_lazy('departments:departments') + '?created'
 
 
 
