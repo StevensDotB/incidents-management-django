@@ -1,16 +1,6 @@
 from django.db import models
+from django.apps import apps
 from django.contrib.auth.models import User
-
-
-class Department(models.Model):
-    """Model for departments name"""
-    class Meta:
-        db_table = "departments"
-
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
 
 
 class UserEmployee(models.Model):
@@ -19,4 +9,4 @@ class UserEmployee(models.Model):
         db_table = "users_employees"
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    department = models.ForeignKey(Department, on_delete=False)
+    department = models.ForeignKey('department.Department', null=True, on_delete=False)

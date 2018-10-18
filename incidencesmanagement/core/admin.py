@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
-from .models import UserEmployee, Department
+from .models import UserEmployee
 
 
 class UserEmployeeInline(admin.StackedInline):
@@ -23,11 +23,10 @@ class UserEmployeeAdmin(UserAdmin):
                     'last_login')
 
     def get_department(self, instance):
-        return instance.useremployee.department.name
+        return instance.useremployee.department
 
     get_department.short_description = 'Department'
 
 
 admin.site.unregister(User)
 admin.site.register(User, UserEmployeeAdmin)
-admin.site.register(Department)
