@@ -5,6 +5,7 @@ from .models import Incidence, IncidenceLevel, IncidenceStatus, IncidenceStatusL
 class IncidenceAdmin(admin.ModelAdmin):
     readonly_fields = ('create', 'update',)
     list_display = ('get_username',
+                    'get_department',
                     'subject',
                     'message',
                     'get_level',
@@ -15,6 +16,9 @@ class IncidenceAdmin(admin.ModelAdmin):
     def get_username(self, instance):
         return instance.user.username
 
+    def get_department(self, instance):
+        return instance.user.useremployee.department.name
+
     def get_level(self, instance):
         return instance.level.name
 
@@ -22,6 +26,7 @@ class IncidenceAdmin(admin.ModelAdmin):
         return instance.status.name
 
     get_username.short_description = 'User'
+    get_department.short_description = 'Department'
     get_level.short_description = 'Level'
     get_status.short_description = 'Status'
 
