@@ -2,9 +2,9 @@
 {% block content %}
     <div class="container py-lg-5">
         <div class="row justify-content-center">
-            {% if 'created' in request.GET %}
+            {% if 'action' in request.GET %}
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Ready!</strong> Department created with success.
+                    <strong>Ready!</strong> Department {{ request.GET.action }} with success.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -27,12 +27,12 @@
                             <td>{{ department.name }}</td>
                             <td>
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-info btn-sm">Edit</button>
+                                    <a href="{% url 'departments:update' department.id %}" class="btn btn-info btn-sm">Edit</a>
                                 </div>
                             </td>
                             <td>
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                    <a href="{% url 'departments:delete' department.id %}" class="btn btn-danger btn-sm">Delete</a>
                                 </div>
                             </td>
                         </tr>
@@ -42,7 +42,7 @@
 
             </div>
             <div class="col-lg-2 col-sm-12 my-1">
-                <a href="{% url 'departments:create' %}" class="btn btn-info btn-md btn-block">New Department</a>
+                <a href="{% url 'departments:create' %}" class="btn btn-success btn-md btn-block">New Department</a>
             </div>
 
         </div>

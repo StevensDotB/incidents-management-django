@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 m-lg-4">
+                <h3 class="my-4">Edit Department</h3>
+                <form method="post">{% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="text-left">
+                        <a href="{% url 'departments:departments' %}" class="btn btn-outline-danger">Cancel</a>
+                        <input type="submit" class="btn btn-info" value="Save"/>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

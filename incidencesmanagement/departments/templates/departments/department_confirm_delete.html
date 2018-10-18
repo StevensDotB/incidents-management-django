@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 m-lg-4">
+                <h3 class="my-4">Delete Department</h3>
+                <form method="post">{% csrf_token %}
+                    <p>Are you sure you want to delete <strong>"{{ department.name }}"</strong>?</p>
+                    <div class="text-left">
+                        <a href="{% url 'departments:departments' %}" class="btn btn-outline-danger">Cancel</a>
+                        <input type="submit" class="btn btn-info" value="Delete"/>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
