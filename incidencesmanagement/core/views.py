@@ -53,16 +53,3 @@ class UserCreate(TemplateView):
                 return HttpResponseRedirect(reverse_lazy('core_users_list') + '?action=created')
 
         return render(request, self.template_name, {'form': form, 'error': error})
-
-
-
-
-
-
-
-
-
-
-
-    
-

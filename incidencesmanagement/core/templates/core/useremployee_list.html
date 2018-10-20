@@ -33,7 +33,13 @@
                             <td>{{ user_employee.user.email }}</td>
                             <td>{{ user_employee.full_name }}</td>
                             <td>{{ user_employee.department }}</td>
-                            <td>{{ user_employee.user.last_login }}</td>
+                            <td>
+                                {% if user_employee.user.last_login is None %}
+                                    -
+                                {% else %}
+                                    {{ user_employee.user.last_login }}
+                                {% endif %}
+                            </td>
                             <td>{{ user_employee.user.date_joined }}</td>
                             <td>
                                 <div class="text-center">
