@@ -10,3 +10,7 @@ class UserEmployee(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.ForeignKey('departments.Department', null=True, on_delete=False)
+
+    @property
+    def full_name(self):
+        return f'{self.user.first_name} {self.user.last_name}'
