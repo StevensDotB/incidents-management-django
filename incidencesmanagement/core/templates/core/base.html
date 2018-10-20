@@ -47,13 +47,13 @@
         <div class="navbar-collapse collapse" id="navbar-manage" style="">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'core_users_list' %}">Users<span class="sr-only">(current)</span></a>
+                    <a class="nav-link {% if '/users/' in request.path %}active{% endif %}" href="{% url 'core_users_list' %}">Users</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'departments:departments' %}">Departments<span class="sr-only">(current)</span></a>
+                    <a class="nav-link {% if '/departments/' in request.path %}active{% endif %}" href="{% url 'departments:departments' %}">Departments</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home' %}">Incidences<span class="sr-only">(current)</span></a>
+                    <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Incidences</a>
                 </li>
             </ul>
         </div>
