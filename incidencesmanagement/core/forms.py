@@ -17,10 +17,10 @@ class UserEmployeeCreationForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput, strip=False, required=True, label='')
     password_again = forms.CharField(widget=forms.PasswordInput, strip=False, required=True, label='')
 
-    username.widget.attrs.update({"class": "form-control", "placeholder": "Username"})
-    first_name.widget.attrs.update({"class": "form-control", "placeholder": "First name"})
-    last_name.widget.attrs.update({"class": "form-control", "placeholder": "Last name"})
-    email.widget.attrs.update({"class": "form-control", "placeholder": "Email ( i.e employee_a@email.com )"})
+    username.widget.attrs.update({"class": "form-control", "placeholder": "Username", 'autocomplete': 'off'})
+    first_name.widget.attrs.update({"class": "form-control", "placeholder": "First name", 'autocomplete': 'off'})
+    last_name.widget.attrs.update({"class": "form-control", "placeholder": "Last name", 'autocomplete': 'off'})
+    email.widget.attrs.update({"class": "form-control", "placeholder": "Email ( i.e employee_a@email.com )", 'autocomplete': 'off'})
     department.widget.attrs.update({"class": "form-control"})
     password.widget.attrs.update({"class": "form-control", "placeholder": "Password"})
     password_again.widget.attrs.update({"class": "form-control", "placeholder": "Same password as before"})
@@ -41,10 +41,10 @@ class UserEmployeeUpdateForm(forms.Form):
     department = forms.ModelChoiceField(queryset=Department.objects.all(),
                                         empty_label="Select a Department",
                                         label='')
-    username.widget.attrs.update({"class": "form-control", "placeholder": "Username"})
-    first_name.widget.attrs.update({"class": "form-control", "placeholder": "First name"})
-    last_name.widget.attrs.update({"class": "form-control", "placeholder": "Last name"})
-    email.widget.attrs.update({"class": "form-control", "placeholder": "Email ( i.e employee_a@email.com )"})
+    username.widget.attrs.update({"class": "form-control", "placeholder": "Username",  'autocomplete': 'off'})
+    first_name.widget.attrs.update({"class": "form-control", "placeholder": "First name",  'autocomplete': 'off'})
+    last_name.widget.attrs.update({"class": "form-control", "placeholder": "Last name",  'autocomplete': 'off'})
+    email.widget.attrs.update({"class": "form-control", "placeholder": "Email ( i.e employee_a@email.com )",  'autocomplete': 'off'})
     department.widget.attrs.update({"class": "form-control"})
 
     error_messages = {
