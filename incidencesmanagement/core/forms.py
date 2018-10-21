@@ -5,7 +5,7 @@ Department = apps.get_model('departments', 'Department')
 
 
 class UserEmployeeCreationForm(forms.Form):
-    """Form for User employee creation"""
+    """Form for User creation"""
 
     username = forms.CharField(max_length=50, required=True, label='')
     first_name = forms.CharField(max_length=50, required=True, label='')
@@ -13,7 +13,7 @@ class UserEmployeeCreationForm(forms.Form):
     email = forms.EmailField(required=True, label='')
     department = forms.ModelChoiceField(queryset=Department.objects.all(),
                                         empty_label="Select a Department",
-                                        required=True, label='')
+                                        label='')
     password = forms.CharField(widget=forms.PasswordInput, strip=False, required=True, label='')
     password_again = forms.CharField(widget=forms.PasswordInput, strip=False, required=True, label='')
 
@@ -27,5 +27,40 @@ class UserEmployeeCreationForm(forms.Form):
     
     error_messages = {
         "password_mismatch": "The two password fields didn't match",
+        "department_required": "The department where the user belongs to is required"
     }
 
+
+class UserEmployeeUpdateForm(forms.Form):
+    """User update Form"""
+
+    username = forms.CharField(max_length=50, required=True, label='')
+    first_name = forms.CharField(max_length=50, required=True, label='')
+    last_name = forms.CharField(max_length=50, required=True, label='')
+    email = forms.EmailField(required=True, label='')
+    department = forms.ModelChoiceField(queryset=Department.objects.all(),
+                                        empty_label="Select a Department",
+                                        label='')
+    username.widget.attrs.update({"class": "form-control", "placeholder": "Username"})
+    first_name.widget.attrs.update({"class": "form-control", "placeholder": "First name"})
+    last_name.widget.attrs.update({"class": "form-control", "placeholder": "Last name"})
+    email.widget.attrs.update({"class": "form-control", "placeholder": "Email ( i.e employee_a@email.com )"})
+    department.widget.attrs.update({"class": "form-control"})
+
+    error_messages = {
+        "department_required": "The department where the user belongs to is required"
+    }
+
+
+class UserEmployeeChangePasswordForm(forms.Form):
+    """Change User password Form"""
+
+    password = forms.CharField(widget=forms.PasswordInput, strip=False, required=True, label='')
+    password_again = forms.CharField(widget=forms.PasswordInput, strip=False, required=True, label='')
+
+    password.widget.attrs.update({"class": "form-control", "placeholder": "Password"})
+    password_again.widget.attrs.update({"class": "form-control", "placeholder": "Same password as before"})
+
+    error_messages = {
+        "password_mismatch": "The two password fields didn't match",
+    }

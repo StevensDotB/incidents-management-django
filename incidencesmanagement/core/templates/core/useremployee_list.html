@@ -43,7 +43,7 @@
                             <td>{{ user_employee.user.date_joined }}</td>
                             <td>
                                 <div class="text-center">
-                                    <a href="#" class="btn btn-info btn-sm">
+                                    <a href="{% url 'core_user_update' user_employee.user.username %}" class="btn btn-info btn-sm">
                                        Edit
                                     </a>
                                 </div>
