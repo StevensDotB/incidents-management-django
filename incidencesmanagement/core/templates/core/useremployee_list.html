@@ -43,14 +43,14 @@
                             <td>{{ user_employee.user.date_joined }}</td>
                             <td>
                                 <div class="text-center">
-                                    <a href="{% url 'core_user_update' user_employee.user.username %}" class="btn btn-info btn-sm">
+                                    <a href="{% url 'users:update' user_employee.user.username %}" class="btn btn-info btn-sm">
                                        Edit
                                     </a>
                                 </div>
                             </td>
                             <td>
                                 <div class="text-center">
-                                    <a href="{% url 'core_user_delete' user_employee.id %}" class="btn btn-danger btn-sm">
+                                    <a href="{% url 'users:delete' user_employee.id %}" class="btn btn-danger btn-sm">
                                         Delete
                                     </a>
                                 </div>
@@ -61,7 +61,7 @@
                 </table>
             </div>
             <div class="col-lg-2 col-sm-12 my-1">
-                <a href="{% url 'core_user_create' %}" class="btn btn-success btn-md btn-block">New User</a>
+                <a href="{% url 'users:create' %}" class="btn btn-success btn-md btn-block">New User</a>
             </div>
 
         </div>

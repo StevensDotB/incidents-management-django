@@ -57,7 +57,7 @@ class UserCreateView(TemplateView):
                 user_employee = UserEmployee(user=user, department=form.cleaned_data['department'])
                 user_employee.save()
 
-                return HttpResponseRedirect(reverse_lazy('core_users_list') + '?action=created')
+                return HttpResponseRedirect(reverse_lazy('users:users') + '?action=created')
 
         return render(request, self.template_name, {'form': form, 'error': error})
 
@@ -96,7 +96,7 @@ class UserUpdateView(TemplateView):
                 user_employee.department = form.cleaned_data['department']
                 user_employee.save()
 
-                return HttpResponseRedirect(reverse_lazy('core_users_list') + '?action=updated')
+                return HttpResponseRedirect(reverse_lazy('users:users') + '?action=updated')
 
         return render(request, self.template_name, {'form': form, 'error': error})
 
@@ -125,7 +125,7 @@ class UserChangePassword(TemplateView):
                 user.set_password(form.cleaned_data['password'])
                 user.save()
 
-                return HttpResponseRedirect(reverse_lazy('core_user_update', args=[username]) + '?action=password_changed')
+                return HttpResponseRedirect(reverse_lazy('users:update', args=[username]) + '?action=password_changed')
 
         return render(request, self.template_name, {'form': form, 'error': error, 'username': username})
 
@@ -135,4 +135,4 @@ class UserDeleteView(DeleteView):
     model = UserEmployee
 
     def get_success_url(self):
-        return reverse_lazy('core_users_list') + '?action=deleted'
+        return reverse_lazy('users:users') + '?action=deleted'

@@ -21,11 +21,11 @@
                     {% endif %}
                     {{ form.as_p }}
                     <div class="text-right">
-                        <a class="btn btn-link" href="{% url 'core_user_change_password' username %}">Change
+                        <a class="btn btn-link" href="{% url 'users:change_password' username %}">Change
                             password</a>
                     </div>
                     <div class="text-left">
-                        <a href="{% url 'core_users_list' %}" class="btn btn-outline-danger">Cancel</a>
+                        <a href="{% url 'users:users' %}" class="btn btn-outline-danger">Cancel</a>
                         <input type="submit" class="btn btn-info" value="Save"/>
                     </div>
                 </form>

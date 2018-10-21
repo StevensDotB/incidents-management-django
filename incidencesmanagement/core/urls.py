@@ -8,9 +8,13 @@ from .views import (HomeView,
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
-    path('users/', UserListView.as_view(), name='core_users_list'),
-    path('users/create', UserCreateView.as_view(), name='core_user_create'),
-    path('users/<username>/edit', UserUpdateView.as_view(), name='core_user_update'),
-    path('users/<username>/change_password', UserChangePassword.as_view(), name='core_user_change_password'),
-    path('users/<int:pk>/delete', UserDeleteView.as_view(), name='core_user_delete'),
 ]
+
+# Users urls
+users_urlpatterns = ([
+     path('', UserListView.as_view(), name='users'),
+     path('create/', UserCreateView.as_view(), name='create'),
+     path('<username>/edit/', UserUpdateView.as_view(), name='update'),
+     path('<username>/change_password/', UserChangePassword.as_view(), name='change_password'),
+     path('<int:pk>/delete/', UserDeleteView.as_view(), name='delete'),
+], 'users')

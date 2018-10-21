@@ -7,7 +7,7 @@
                 <form method="post">{% csrf_token %}
                     <p>Are you sure you want to delete <strong>"{{ object.user.username }}"</strong>?</p>
                     <div class="text-left">
-                        <a href="{% url 'core_users_list' %}" class="btn btn-outline-danger">Cancel</a>
+                        <a href="{% url 'users:users' %}" class="btn btn-outline-danger">Cancel</a>
                         <input type="submit" class="btn btn-info" value="Delete"/>
                     </div>
                 </form>
