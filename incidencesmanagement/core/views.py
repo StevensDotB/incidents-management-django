@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views.generic.list import ListView
+from django.views.generic.edit import DeleteView
 from django.views.generic import TemplateView
 from django.contrib.auth.models import User
 from .models import UserEmployee
@@ -127,3 +128,11 @@ class UserChangePassword(TemplateView):
                 return HttpResponseRedirect(reverse_lazy('core_user_update', args=[username]) + '?action=password_changed')
 
         return render(request, self.template_name, {'form': form, 'error': error, 'username': username})
+
+
+class UserDeleteView(DeleteView):
+    """User delete view"""
+    model = UserEmployee
+
+    def get_success_url(self):
+        return reverse_lazy('core_users_list') + '?action=deleted'
