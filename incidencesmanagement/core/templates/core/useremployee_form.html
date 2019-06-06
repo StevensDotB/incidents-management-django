@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 m-lg-4">
+                <h3>Create User</h3>
+                <form method="post">{% csrf_token %}
+                    {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                    {% endif %}
+                    {{ form.as_p }}
+                    <div class="text-left">
+                        <input type="submit" class="btn btn-info" value="Save"/>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,69 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <div class="container py-lg-5">
+        <div class="row justify-content-center">
+            {% if 'action' in request.GET %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Ready!</strong> User {{ request.GET.action }} with success.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark text-center">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Last Login</th>
+                        <th scope="col">Date Joined</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user_employee in object_list %}
+                        <tr>
+                            <th scope="row" class="text-center">{{ user_employee.id }}</th>
+                            <td>{{ user_employee.user.username }}</td>
+                            <td>{{ user_employee.user.email }}</td>
+                            <td>{{ user_employee.full_name }}</td>
+                            <td>{{ user_employee.department }}</td>
+                            <td>
+                                {% if user_employee.user.last_login is None %}
+                                    -
+                                {% else %}
+                                    {{ user_employee.user.last_login }}
+                                {% endif %}
+                            </td>
+                            <td>{{ user_employee.user.date_joined }}</td>
+                            <td>
+                                <div class="text-center">
+                                    <a href="{% url 'users:update' user_employee.user.username %}" class="btn btn-info btn-sm">
+                                       Edit
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <a href="{% url 'users:delete' user_employee.id %}" class="btn btn-danger btn-sm">
+                                        Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-2 col-sm-12 my-1">
+                <a href="{% url 'users:create' %}" class="btn btn-success btn-md btn-block">New User</a>
+            </div>
+
+        </div>
+    </div>
+{% endblock content %}

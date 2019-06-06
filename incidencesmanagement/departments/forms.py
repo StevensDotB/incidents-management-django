@@ -8,7 +8,7 @@ class DepartmentForm(forms.ModelForm):
         model = Department
         fields = ['name']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Department name'})
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Department name', 'autocomplete': 'off'})
         }
         labels = {
             'name': ''

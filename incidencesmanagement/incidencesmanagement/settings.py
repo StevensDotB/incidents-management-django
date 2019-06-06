@@ -25,7 +25,7 @@ SECRET_KEY = '4c0%-$ihdo@!zkr98=hgz&l@1q)(s6=3**q1_txi&hp$c!iebf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['testserver', 'localhost']
 
 
 # Application definition
@@ -83,6 +83,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
             'read_default_file': os.path.join(BASE_DIR, 'my.cnf')
+        },
+        'TEST': {
+            'NAME': 'test_incidents_management'
         }
     }
 }

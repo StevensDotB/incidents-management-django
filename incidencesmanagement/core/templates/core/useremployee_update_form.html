@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+{% load possession %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 m-lg-4">
+                <h3 class="my-4">Update user <strong><i>{{ username }}</i></strong></h3>
+                {% if 'action' in request.GET %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Ready!</strong> Password changed with success.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
+                <form method="post">{% csrf_token %}
+                    {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                    {% endif %}
+                    {{ form.as_p }}
+                    <div class="text-right">
+                        <a class="btn btn-link" href="{% url 'users:change_password' username %}">Change
+                            password</a>
+                    </div>
+                    <div class="text-left">
+                        <a href="{% url 'users:users' %}" class="btn btn-outline-danger">Cancel</a>
+                        <input type="submit" class="btn btn-info" value="Save"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
