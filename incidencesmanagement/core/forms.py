@@ -27,6 +27,8 @@ class UserEmployeeCreationForm(forms.Form):
     
     error_messages = {
         "password_mismatch": "The two password fields didn't match",
+        "password_strength": "Password must contain uppercase, lowercase, digits and at least one special character",
+        "password_too_short": "Password must have 8+ characters",
         "department_required": "The department where the user belongs to is required"
     }
 
@@ -63,4 +65,7 @@ class UserEmployeeChangePasswordForm(forms.Form):
 
     error_messages = {
         "password_mismatch": "The two password fields didn't match",
+        "password_strength": "Password must contain uppercase, lowercase, digits and at least one special character",
+        "password_too_short": "Password must have 8+ characters",
+        "department_required": "The department where the user belongs to is required"
     }

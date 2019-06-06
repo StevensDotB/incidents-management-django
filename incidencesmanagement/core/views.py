@@ -38,16 +38,32 @@ class UserCreateView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         error = ''
+        form_validated = True
         form = UserEmployeeCreationForm(request.POST)
         if form.is_valid():
+
             if not form.cleaned_data['department']:
                 error = form.error_messages['department_required']
 
-            elif form.cleaned_data['password'] and form.cleaned_data['password_again'] \
-                    and form.cleaned_data['password_again'] != form.cleaned_data['password']:
-                error = form.error_messages['password_mismatch']
+            password = form.cleaned_data['password']
 
-            else:
+            if password:
+                uppercase = len([char for char in password if char.islower()])
+                lowercase = len([char for char in password if char.isupper()])
+                special_char = len([char for char in password if char in ",._-!$#*"])
+
+                if uppercase < 1 or lowercase < 1 or special_char < 1:
+                    error = form.error_messages['password_strength']
+                    form_validated = False
+
+                if len(password) < 8:
+                    form_validated = False
+                    error = form.error_messages['password_too_short']
+
+                elif password and form.cleaned_data['password_again'] and form.cleaned_data['password_again'] != password:
+                    error = form.error_messages['password_mismatch']
+
+            if form_validated:
                 user = User(username=form.cleaned_data['username'],
                             email=form.cleaned_data['email'],
                             first_name=form.cleaned_data['first_name'],
@@ -80,9 +96,13 @@ class UserUpdateView(TemplateView):
         return render(request, self.template_name, {'form': form, 'username': kwargs['username']})
 
     def post(self, request, *args, **kwargs):
+
         error = ''
+        form_validated = True
         form = UserEmployeeUpdateForm(request.POST)
+
         if form.is_valid():
+
             if not form.cleaned_data['department']:
                 error = form.error_messages['department_required']
             else:
@@ -112,20 +132,37 @@ class UserChangePassword(TemplateView):
     def post(self, request, *args, **kwargs):
         """Send data"""
         error = ''
+        valid_password = True
         form = UserEmployeeChangePasswordForm(request.POST)
         username = request.POST.get('username')
 
         if form.is_valid():
-            if form.cleaned_data['password'] and form.cleaned_data['password_again'] \
-                    and form.cleaned_data['password_again'] != form.cleaned_data['password']:
-                error = form.error_messages['password_mismatch']
 
-            else:
-                user = User.objects.get_by_natural_key(username)
-                user.set_password(form.cleaned_data['password'])
-                user.save()
+            password = form.cleaned_data['password']
 
-                return HttpResponseRedirect(reverse_lazy('users:update', args=[username]) + '?action=password_changed')
+            if password:
+                uppercase = len([char for char in password if char.islower()])
+                lowercase = len([char for char in password if char.isupper()])
+                special_char = len([char for char in password if char in ",._-!$#*"])
+
+                if uppercase < 1 or lowercase < 1 or special_char < 1:
+                    error = form.error_messages['password_strength']
+                    valid_password = False
+
+                if len(password) < 8:
+                    error = form.error_messages['password_too_short']
+                    valid_password = False
+
+                if password and form.cleaned_data['password_again'] and form.cleaned_data['password_again'] != password:
+                    valid_password = False
+                    error = form.error_messages['password_mismatch']
+
+                if valid_password:
+                    user = User.objects.get_by_natural_key(username)
+                    user.set_password(form.cleaned_data['password'])
+                    user.save()
+
+                    return HttpResponseRedirect(reverse_lazy('users:update', args=[username]) + '?action=password_changed')
 
         return render(request, self.template_name, {'form': form, 'error': error, 'username': username})
 
